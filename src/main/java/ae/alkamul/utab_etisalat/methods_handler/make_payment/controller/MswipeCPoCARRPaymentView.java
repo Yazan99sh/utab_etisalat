@@ -1,16 +1,11 @@
-package ae.alkamul.utab_etisalat;
+package ae.alkamul.utab_etisalat.methods_handler.make_payment.controller;
 
 import static com.mswipe.uaesdk.view.MSAARHandlerActivity.MS_CPOC_ACTIVITY_INTENT_ACTION;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mswipe.uaesdk.view.MSAARHandlerActivity;
 import ae.alkamul.utab_etisalat.methods_handler.make_payment.util.Constants;
@@ -45,7 +40,7 @@ public class MswipeCPoCARRPaymentView extends Activity {
             HashMap<String, Object> extraString = (HashMap<String, Object>) intent.getSerializableExtra("paymentDetails");;
 
             if (extraString != null) {
-                PosConfiguration configuration = new PosConfiguration().convertHashMapToModel(paymentDetails);
+                PosConfiguration configuration = new PosConfiguration().convertHashMapToModel(extraString);
                 processCPOCSale(configuration);
             }
             // Example of fetching an integer extra
@@ -60,32 +55,18 @@ public class MswipeCPoCARRPaymentView extends Activity {
 
         double amount = posConfiguration.getAmount();
 
-        try
-        {
-            if (mTxtCreditAmount.length() > 0)
-                amount = Double.parseDouble(removeChar(mTxtCreditAmount.getText().toString(),','));
-        }
-        catch (Exception ex) {
-            amount = 0;
-        }
-
-        if (mTxtUserName.getText().toString().trim().startsWith("0")) {
-
-
+        if (posConfiguration.getUsername().trim().startsWith("0")) {
             showDialog("The userid cannot start with 0.");
-            mTxtUserName.requestFocus();
             return;
         }
-        else if(mTxtUserName.getText().toString().length() < 9)
+        else if(posConfiguration.getUsername().length() < 9)
         {
             showDialog("enter valid userid");
-            mTxtUserName.requestFocus();
             return;
         }
-        else if(mTxtPassword.getText().toString().length() == 0)
+        else if(posConfiguration.getPassword().length() == 0)
         {
             showDialog("enter a valid password");
-            mTxtPassword.requestFocus();
             return;
         }
         else if (amount < 1)
@@ -98,12 +79,12 @@ public class MswipeCPoCARRPaymentView extends Activity {
         Intent intent = new Intent(MswipeCPoCARRPaymentView.this, MSAARHandlerActivity.class);
         intent.setType(MS_CPOC_ACTIVITY_INTENT_ACTION);
 
-        intent.putExtra("username", mTxtUserName.getText().toString().trim());
-        intent.putExtra("password", mTxtPassword.getText().toString().trim());
+        intent.putExtra("username", posConfiguration.getUsername().trim());
+        intent.putExtra("password", posConfiguration.getPassword().trim());
 
-        intent.putExtra("production", production);
+        intent.putExtra("production", posConfiguration.isProduction());
 
-        double amt = Double.parseDouble(mTxtCreditAmount.getText().toString().trim());
+        double amt = posConfiguration.getAmount();
         String totalAmt = String.format("%.2f", amt);
 
         Log.v("CPoC", "totalAmt" + totalAmt);

@@ -1,3 +1,5 @@
+package ae.alkamul.utab_etisalat.methods_handler.make_payment.models;
+
 import java.util.HashMap;
 
 public class PosConfiguration {
@@ -16,9 +18,9 @@ public class PosConfiguration {
         PosConfiguration model = new PosConfiguration();
         model.setUsername((String) hashMap.get("username"));
         model.setPassword((String) hashMap.get("password"));
-        model.setAmount((String) hashMap.get("amount"));
-        model.setProduction((String) hashMap.get("production"));
-        model.setTimeOut((String) hashMap.get("timeout"));
+        model.setAmount((double) hashMap.get("amount"));
+        model.setProduction((boolean) hashMap.get("production"));
+        model.setTimeOut((int) hashMap.get("timeout"));
 
         return model;
     }

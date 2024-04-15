@@ -13,9 +13,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mswipeuae.sdk.demo.R;
-import com.mswipeuae.sdk.demo.data.AppSharedPrefrences;
-import com.mswipeuae.sdk.demo.data.ApplicationData;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -25,6 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import ae.alkamul.utab_etisalat.R;
+import ae.alkamul.utab_etisalat.methods_handler.make_payment.data.ApplicationData;
 
 
 public class Constants 
@@ -51,29 +51,29 @@ public class Constants
 
     }
 
-    public static Dialog showDeviceConnectionDialog(Context context, String title) {
-        Dialog dialog = new Dialog(context, R.style.styleCustDlg);
-        dialog.setContentView(R.layout.customdeviceconnectiondlg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        dialog.setCancelable(false);
-        // set the title
-        TextView txttitle = (TextView) dialog.findViewById(R.id.customdeviceconnectiondlgTXT_title);
-        txttitle.setText(title);
-        return dialog;
-
-    }
+//    public static Dialog showDeviceConnectionDialog(Context context, String title) {
+//        Dialog dialog = new Dialog(context, R.style.styleCustDlg);
+//        dialog.setContentView(R.layout.customdeviceconnectiondlg);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+//
+//        dialog.setCancelable(false);
+//        // set the title
+//        TextView txttitle = (TextView) dialog.findViewById(R.id.customdeviceconnectiondlgTXT_title);
+//        txttitle.setText(title);
+//        return dialog;
+//
+//    }
 
 	public static void showDialog(Context context, String title, String msg) {
     	
@@ -96,7 +96,7 @@ public class Constants
     		CUSTOM_DLG_TYPE customDlgType, String firstBtnText, String secondBtnText)
     {
     	
-    	final Dialog dialog = new Dialog(context, R.style.styleCustDlg);
+    	final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.customdlg);
         dialog.setCanceledOnTouchOutside(false);
 
@@ -140,205 +140,205 @@ public class Constants
     }
 
 
-    public static void showActivityDialog(Context context, String title, String msg) {
-
-        final Dialog dialog = showActivityDialog(context, title, msg, CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_SHOW_DLG_INFO,
-                context.getString(R.string.ok),
-                context.getString(R.string.cancel));
-
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey (DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK &&
-                        event.getAction() == KeyEvent.ACTION_UP &&
-                        !event.isCanceled()) {
-
-                    dialog.dismiss();
-                    return true;
-                }
-                return false;
-            }
-        });
-        dialog.show();
-    }
-
-
-    public static Dialog showActivityDialog(final Context context, String title, String msg,
-                                    CUSTOM_DLG_TYPE customDlgType, String firstBtnText, String secondBtnText)
-    {
-
-        final Dialog dialog = new Dialog(context, R.style.StyleCustomDlg_white);
+//    public static void showActivityDialog(Context context, String title, String msg) {
+//
+//        final Dialog dialog = showActivityDialog(context, title, msg, CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_SHOW_DLG_INFO,
+//                context.getString(R.string.ok),
+//                context.getString(R.string.cancel));
+//
+//        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey (DialogInterface dialog, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK &&
+//                        event.getAction() == KeyEvent.ACTION_UP &&
+//                        !event.isCanceled()) {
+//
+//                    dialog.dismiss();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+//        dialog.show();
+//    }
 
 
-        dialog.setContentView(R.layout.activity_customdlg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
+//    public static Dialog showActivityDialog(final Context context, String title, String msg,
+//                                    CUSTOM_DLG_TYPE customDlgType, String firstBtnText, String secondBtnText)
+//    {
+//
+//        final Dialog dialog = new Dialog(context, R.style.StyleCustomDlg_white);
+//
+//
+//        dialog.setContentView(R.layout.activity_customdlg);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setCancelable(false);
+//
+//        ApplicationData applicationData = ApplicationData.getApplicationDataSharedInstance();
+//
+//        // set the title
+//        TextView txtTitle = (TextView) dialog.findViewById(R.id.customdlg_sdk_TXT_title);
+//        txtTitle.setText(title);
+//        txtTitle.setTypeface(applicationData.font);
+//
+//        // to set the message
+//        TextView message = (TextView) dialog.findViewById(R.id.customdlg_sdk_TXT_Info);
+//        message.setText(msg);
+//        message.setTypeface(applicationData.font);
+//
+//        RelativeLayout yes = (RelativeLayout) dialog.findViewById(R.id.customdlg_sdk_RLT_yes);
+//        final  RelativeLayout no = (RelativeLayout) dialog.findViewById(R.id.customdlg_sdk_RLT_no);
+//        ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_yes)).setText(firstBtnText);
+//        ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_no)).setText(secondBtnText);
+//
+//        if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_SHOW_DLG_INFO) {
+//
+//            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.GONE);
+//            ((View) dialog.findViewById(R.id.customdlg_sdk_view)).setVisibility(View.GONE);
+//            ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_yes)).setText(firstBtnText);
+//            yes.setOnClickListener(new OnClickListener() {
+//
+//                public void onClick(View v) {
+//                    dialog.dismiss();
+//
+//                }
+//            });
+//        }
+//        else if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_RETURN_DLG_INFO) {
+//
+//            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.GONE);
+//            ((View) dialog.findViewById(R.id.customdlg_sdk_view)).setVisibility(View.GONE);
+//
+//        }
+//        else if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_RETURN_DLG_CONFIRMATION) {
+//
+//            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.VISIBLE);
+//
+//            no.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    dialog.dismiss();
+//                }
+//            });
+//
+//        }
+//
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+//        dialog.show();
+//        return dialog;
+//
+//    }
 
-        ApplicationData applicationData = ApplicationData.getApplicationDataSharedInstance();
 
-        // set the title
-        TextView txtTitle = (TextView) dialog.findViewById(R.id.customdlg_sdk_TXT_title);
-        txtTitle.setText(title);
-        txtTitle.setTypeface(applicationData.font);
+//    public static Dialog shwoAppCustionDialog(Context context, String title, String firstBtnText, String secondBtnText) {
+//
+//        Dialog dialog = new Dialog(context,R.style.styleCustDlg);
+//       /* dialog.setContentView(R.layout.application_cust_dialog);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+//
+//        dialog.setCancelable(true);
+//        ApplicationData applicationData = ApplicationData.getApplicationDataSharedInstance();
+//
+//        // set the title
+//        TextView txttitle = (TextView) dialog.findViewById(R.id.application_customdlg_TXT_Info);
+//        txttitle.setText(title);
+//        txttitle.setTypeface(applicationData.fontBold);
+//
+//        Button firstBtn = (Button) dialog.findViewById(R.id.application_customdlg_BTN_yes);
+//        firstBtn.setText(firstBtnText);
+//        firstBtn.setTypeface(applicationData.font);
+//
+//        Button secondBtn = (Button) dialog.findViewById(R.id.application_customdlg_BTN_no);
+//        secondBtn.setText(secondBtnText);
+//        secondBtn.setTypeface(applicationData.font);
+//
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
+//
+//        return dialog;
+//
+//    }
 
-        // to set the message
-        TextView message = (TextView) dialog.findViewById(R.id.customdlg_sdk_TXT_Info);
-        message.setText(msg);
-        message.setTypeface(applicationData.font);
+//    public static Dialog showDialogPin(Context context, String title, String msg,
+//                                        String firstBtnText, String secondBtnText, String thirdText) {
+//         Dialog dialog = new Dialog(context, R.style.styleCustDlg);
+//        dialog.setContentView(R.layout.custompindlg);
+//        dialog.setCancelable(true);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+//
+//
+//        // set the title
+//        TextView txttitle = (TextView) dialog.findViewById(R.id.custompindlg_TXT_title);
+//        txttitle.setText(title);
+//
+//
+//        // to set the message
+//        TextView message = (TextView) dialog.findViewById(R.id.custompindlg_TXT_info);
+//        message.setText(msg);
+//
+//        Button accept = (Button) dialog.findViewById(R.id.custompindlg_BTN_accept);
+//        accept.setText(firstBtnText);
+//
+//
+//        Button bypass = (Button) dialog.findViewById(R.id.custompindlg_BTN_bypass);
+//        bypass.setText(secondBtnText);
+//
+//        Button no = (Button) dialog.findViewById(R.id.custompindlg_BTN_no);
+//        no.setText(thirdText);
+//        if (thirdText.length() == 0) {
+//            no.setVisibility(View.GONE);
+//        }
+//        return dialog;
+//
+//    }
 
-        RelativeLayout yes = (RelativeLayout) dialog.findViewById(R.id.customdlg_sdk_RLT_yes);
-        final  RelativeLayout no = (RelativeLayout) dialog.findViewById(R.id.customdlg_sdk_RLT_no);
-        ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_yes)).setText(firstBtnText);
-        ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_no)).setText(secondBtnText);
-
-        if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_SHOW_DLG_INFO) {
-
-            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.GONE);
-            ((View) dialog.findViewById(R.id.customdlg_sdk_view)).setVisibility(View.GONE);
-            ((Button) dialog.findViewById(R.id.customdlg_sdk_BTN_yes)).setText(firstBtnText);
-            yes.setOnClickListener(new OnClickListener() {
-
-                public void onClick(View v) {
-                    dialog.dismiss();
-
-                }
-            });
-        }
-        else if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_RETURN_DLG_INFO) {
-
-            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.GONE);
-            ((View) dialog.findViewById(R.id.customdlg_sdk_view)).setVisibility(View.GONE);
-
-        }
-        else if (customDlgType == CUSTOM_DLG_TYPE.CUSTOM_DLG_TYPE_RETURN_DLG_CONFIRMATION) {
-
-            ((RelativeLayout)dialog.findViewById(R.id.customdlg_sdk_RLT_no)).setVisibility(View.VISIBLE);
-
-            no.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    dialog.dismiss();
-                }
-            });
-
-        }
-
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        dialog.show();
-        return dialog;
-
-    }
-
-
-    public static Dialog shwoAppCustionDialog(Context context, String title, String firstBtnText, String secondBtnText) {
-
-        Dialog dialog = new Dialog(context,R.style.styleCustDlg);
-       /* dialog.setContentView(R.layout.application_cust_dialog);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        dialog.setCancelable(true);
-        ApplicationData applicationData = ApplicationData.getApplicationDataSharedInstance();
-
-        // set the title
-        TextView txttitle = (TextView) dialog.findViewById(R.id.application_customdlg_TXT_Info);
-        txttitle.setText(title);
-        txttitle.setTypeface(applicationData.fontBold);
-
-        Button firstBtn = (Button) dialog.findViewById(R.id.application_customdlg_BTN_yes);
-        firstBtn.setText(firstBtnText);
-        firstBtn.setTypeface(applicationData.font);
-
-        Button secondBtn = (Button) dialog.findViewById(R.id.application_customdlg_BTN_no);
-        secondBtn.setText(secondBtnText);
-        secondBtn.setTypeface(applicationData.font);
-
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
-
-        return dialog;
-
-    }
-
-    public static Dialog showDialogPin(Context context, String title, String msg,
-                                        String firstBtnText, String secondBtnText, String thirdText) {
-         Dialog dialog = new Dialog(context, R.style.styleCustDlg);
-        dialog.setContentView(R.layout.custompindlg);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-       
-        // set the title
-        TextView txttitle = (TextView) dialog.findViewById(R.id.custompindlg_TXT_title);
-        txttitle.setText(title);
-        
-
-        // to set the message
-        TextView message = (TextView) dialog.findViewById(R.id.custompindlg_TXT_info);
-        message.setText(msg);
-        
-        Button accept = (Button) dialog.findViewById(R.id.custompindlg_BTN_accept);
-        accept.setText(firstBtnText);
-        
-
-        Button bypass = (Button) dialog.findViewById(R.id.custompindlg_BTN_bypass);
-        bypass.setText(secondBtnText);
-        
-        Button no = (Button) dialog.findViewById(R.id.custompindlg_BTN_no);
-        no.setText(thirdText);
-        if (thirdText.length() == 0) {
-            no.setVisibility(View.GONE);
-        }
-        return dialog;
-
-    }
-
-    public static Dialog showAppCustomDialog(Context context, String title) {
-        Dialog dialog = new Dialog(context, R.style.styleCustDlg);
-        dialog.setContentView(R.layout.customappdlg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    return true;
-                }
-
-                return false;
-            }
-        });
-
-        dialog.setCancelable(true);
-        // set the title
-        TextView txttitle = (TextView) dialog.findViewById(R.id.customapplicationdlg_TXT_title);
-        txttitle.setText(title);
-        
-        return dialog;
-
-    }
+//    public static Dialog showAppCustomDialog(Context context, String title) {
+//        Dialog dialog = new Dialog(context, R.style.styleCustDlg);
+//        dialog.setContentView(R.layout.customappdlg);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent keyEvent) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+//
+//        dialog.setCancelable(true);
+//        // set the title
+//        TextView txttitle = (TextView) dialog.findViewById(R.id.customapplicationdlg_TXT_title);
+//        txttitle.setText(title);
+//
+//        return dialog;
+//
+//    }
 
     public final static boolean isValidEmail(CharSequence target) 
     {
@@ -539,9 +539,9 @@ public class Constants
     // card sale
     public static final String CARDSALE_DIALOG_MSG = "Card Sale";
     public static final String CARDSALE_ALERT_AMOUNTMSG = "The total card sale amount is %s ";
-    public static final String CARDSALE_ERROR_INVALIDAMT = "Invalid amount! Minimum amount should be " + AppSharedPrefrences.getAppSharedPrefrencesInstace().getCurrencyCode() + " 1.00 to proceed.";
+    public static final String CARDSALE_ERROR_INVALIDAMT = "Invalid amount! Minimum amount should be " + "AED" + " 1.00 to proceed.";
     public static final String CARDSALE_ERROR_INVALIDCARDDIGITS = "Invalid last 4 digits.";
-    public static final String CARDSALE_ERROR_salecash_max= "Invalid Sale cash amount!  Amount should be between " + AppSharedPrefrences.getAppSharedPrefrencesInstace().getCurrencyCode() + " 1.00 to 1000.00 to proceed.";
+    public static final String CARDSALE_ERROR_salecash_max= "Invalid Sale cash amount!  Amount should be between " + "AED" + " 1.00 to 1000.00 to proceed.";
     public static final String CARDSALE_ERROR_salecash= "amount or sale cash is mandatory for this transaction";
     
 
