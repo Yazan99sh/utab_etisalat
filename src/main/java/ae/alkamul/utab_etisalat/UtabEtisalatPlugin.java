@@ -41,6 +41,7 @@ public class UtabEtisalatPlugin implements FlutterPlugin, MethodCallHandler {
             HashMap<String, Object> arguments = call.argument("paymentDetails");
             // Convert the HashMap to a model class
             Intent intent = new Intent(context, MswipeCPoCARRPaymentView.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             // Pass payment details to the PaymentActivity if needed
             intent.putExtra("paymentDetails", arguments);
             // Start the activity

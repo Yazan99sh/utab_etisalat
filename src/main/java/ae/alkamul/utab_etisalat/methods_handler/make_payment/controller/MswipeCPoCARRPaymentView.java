@@ -43,11 +43,6 @@ public class MswipeCPoCARRPaymentView extends Activity {
                 PosConfiguration configuration = new PosConfiguration().convertHashMapToModel(extraString);
                 processCPOCSale(configuration);
             }
-            // Example of fetching an integer extra
-            int extraInt = intent.getIntExtra("key_int", 0); // 0 is the default value if the key is not found
-            // Do something with the integer
-
-            // You can similarly fetch other types of extras like boolean, double, etc.
         }
     }
 
